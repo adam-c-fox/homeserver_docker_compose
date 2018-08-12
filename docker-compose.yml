@@ -119,3 +119,13 @@ services:
       - PGID=${PGID}
       - TZ=${TZ}   
 
+  ghost:
+    container_name: ghost
+    restart: always
+    image: ghost:latest
+    volumes:
+      - /home/adam/ghost:/var/lib/ghost/content
+    ports:
+      - "2368:2368"
+    environment:
+      - url=http://adamfox.me
