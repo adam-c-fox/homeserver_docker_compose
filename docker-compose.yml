@@ -31,7 +31,7 @@ services:
       - PLEX_CLAIM="claim-8rypNKB835U7zZMMkSAA"
       - PLEX_UID=${PUID}
       - PLEX_GID=${PGID}
-      - ADVERTISE_IP="http://192.168.1.24:32400/"
+      - ADVERTISE_IP="http://192.168.0.46:32400/"
 
   transmission:
     container_name: transmission
@@ -129,3 +129,14 @@ services:
       - "2368:2368"
     environment:
       - url=http://adamfox.me
+
+  openvpn:
+    container_name: openvpn_server
+    cap_add:
+      - NET_ADMIN
+    image: kylemanna/openvpn
+    ports: 
+      - "1194:1194/udp"
+    restart: always
+    volumes:
+      - ./openvpn-data/conf:/etc/openvpn
